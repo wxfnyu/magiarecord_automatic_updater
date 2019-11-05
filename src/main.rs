@@ -11,38 +11,42 @@ use std::path::Path;
 
 
 
-fn main() {
-    let args: Vec<String> = env::args().collect();
-    let na_flag = args.iter().any(|x| x == "-NA" || x == "-na");
-    let force_local_adb_flag = args.iter().any(|x| x == "-forceLocalADB");
-    let force_adb_download_flag = args.iter().any(|x| x == "-forceADBDownload");
-    let use_old_apk_flag = args.iter().any(|x| x == "-noAPKDownload");
-    let no_install_flag = args.iter().any(|x| x == "-noInstall");
+// fn main() {
+//     let args: Vec<String> = env::args().collect();
+//     let na_flag = args.iter().any(|x| x == "-NA" || x == "-na");
+//     let force_local_adb_flag = args.iter().any(|x| x == "-forceLocalADB");
+//     let force_adb_download_flag = args.iter().any(|x| x == "-forceADBDownload");
+//     let use_old_apk_flag = args.iter().any(|x| x == "-noAPKDownload");
+//     let no_install_flag = args.iter().any(|x| x == "-noInstall");
 
-    if(force_adb_download_flag || ((!detect_native_adb() || force_local_adb_flag)  && !detect_prev_downloaded_adb())){
-        //print!("Downloading ADB");
-        //todo, request confirmation of acceptance of adb licence
-        get_platform_tools();
-    }
+//     if(force_adb_download_flag || ((!detect_native_adb() || force_local_adb_flag)  && !detect_prev_downloaded_adb())){
+//         //print!("Downloading ADB");
+//         //todo, request confirmation of acceptance of adb licence
+//         get_platform_tools();
+//     }
     
-    if(!use_old_apk_flag){
-        if(na_flag){
-            print!("Using NA APK\n");
-            get_na_apk();
-        } else {
-            print!("Using JP APK\n");
-            get_jp_apk();
-        }
-    }
+//     if(!use_old_apk_flag){
+//         if(na_flag){
+//             print!("Using NA APK\n");
+//             get_na_apk();
+//         } else {
+//             print!("Using JP APK\n");
+//             get_jp_apk();
+//         }
+//     }
 
-    let phonepath = "/data/local/tmp/magiarecord.apk";
+//     let phonepath = "/data/local/tmp/magiarecord.apk";
 
-    if(!no_install_flag){
-        install_apk((force_local_adb_flag || !detect_native_adb()), phonepath);
-    }
+//     if(!no_install_flag){
+//         install_apk((force_local_adb_flag || !detect_native_adb()), phonepath);
+//     }
     
-    print!("Done!")
-} 
+//     print!("Done!");
+// } 
+
+fn main(){
+    print!("{}", detect_native_adb());
+}
 
 fn detect_prev_downloaded_adb() -> bool {
     let path_to_check = if cfg!(windows){
@@ -56,11 +60,20 @@ fn detect_prev_downloaded_adb() -> bool {
 
 
 fn detect_native_adb() -> bool {
-    let res = match which::which("adb"){
-        Ok(_) => true,
-        Err(_) => false
-    };
+    let res = which::which("adb").is_ok();
     return res;
+}
+
+fn get_url_for_platform_tools() -> String{
+    return if cfg!(target_os="windows"){ //test windows
+        String::from("https://dl.google.com/android/repository/platform-tools-latest-windows.zip")
+    } else if cfg!(target_os="macos"){ //test mac
+        String::from("https://dl.google.com/android/repository/platform-tools-latest-darwin.zip")
+    } else if cfg!(target_os="linux"){ //test linux
+        String::from("https://dl.google.com/android/repository/platform-tools-latest-linux.zip")
+    } else {
+        String::from("unknown")
+    };
 }
 
 fn get_platform_tools(){
@@ -68,20 +81,12 @@ fn get_platform_tools(){
     //see agreement here: https://developer.android.com/studio/releases/platform-tools
     //this entire block is hacky i should really use a native adb server emulation instead
     //but that does not exist, so instead this will have to do
-    let target = if cfg!(target_os="windows"){ //test windows
-        "https://dl.google.com/android/repository/platform-tools-latest-windows.zip"
-    } else if cfg!(target_os="macos"){ //test mac
-        "https://dl.google.com/android/repository/platform-tools-latest-darwin.zip"
-    } else if cfg!(target_os="linux"){ //test linux
-        "https://dl.google.com/android/repository/platform-tools-latest-linux.zip"
-    } else {
-        "unknown"
-    };
+    let target = get_url_for_platform_tools();
     if(target == "unknown"){
         print!("Not a known os, you should manually configure ADB for your platform before running this script");
         std::process::exit(1);
     }
-    let mut resp = reqwest::get(target)
+    let mut resp = reqwest::get(target.as_str())
         .expect("request failed");
     
     let mut out = File::create("platformtools.zip")
