@@ -130,6 +130,8 @@ License
 
 This project is licensed under the MIT License.
 
+ADB is aquired automatically and used by the application under the terms as following: http://www.apache.org/licenses/LICENSE-2.0
+
 Patch Notes
 -----------
 
