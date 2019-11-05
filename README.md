@@ -113,7 +113,10 @@ Useful for debugging and testing.
 Credits
 -------
 
-Thanks to : Madigan Mason and Illumis for testing and debugging help
+Thanks to : 
+
+- Madigan Mason and Illumis for testing and debugging help on the prior Powershell based version
+- Adj and Bracket for this rust based version
 
 Useful Links
 ------------
