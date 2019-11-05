@@ -8,45 +8,45 @@ use std::process::Command;
 use scraper::{Html, Selector};
 use std::env;
 use std::path::Path;
+use std::io::Write;
 
 
 
-// fn main() {
-//     let args: Vec<String> = env::args().collect();
-//     let na_flag = args.iter().any(|x| x == "-NA" || x == "-na");
-//     let force_local_adb_flag = args.iter().any(|x| x == "-forceLocalADB");
-//     let force_adb_download_flag = args.iter().any(|x| x == "-forceADBDownload");
-//     let use_old_apk_flag = args.iter().any(|x| x == "-noAPKDownload");
-//     let no_install_flag = args.iter().any(|x| x == "-noInstall");
+fn main() {
+    let args: Vec<String> = env::args().collect();
+    let na_flag = args.iter().any(|x| x == "-NA" || x == "-na");
+    let force_local_adb_flag = args.iter().any(|x| x == "-forceLocalADB");
+    let force_adb_download_flag = args.iter().any(|x| x == "-forceADBDownload");
+    let use_old_apk_flag = args.iter().any(|x| x == "-noAPKDownload");
+    let no_install_flag = args.iter().any(|x| x == "-noInstall");
 
-//     if(force_adb_download_flag || ((!detect_native_adb() || force_local_adb_flag)  && !detect_prev_downloaded_adb())){
-//         //print!("Downloading ADB");
-//         //todo, request confirmation of acceptance of adb licence
-//         get_platform_tools();
-//     }
+    if(force_adb_download_flag || ((!detect_native_adb() || force_local_adb_flag)  && !detect_prev_downloaded_adb())){
+        //print!("Downloading ADB");
+        //todo, request confirmation of acceptance of adb licence
+        get_platform_tools();
+    }
     
-//     if(!use_old_apk_flag){
-//         if(na_flag){
-//             print!("Using NA APK\n");
-//             get_na_apk();
-//         } else {
-//             print!("Using JP APK\n");
-//             get_jp_apk();
-//         }
-//     }
+    if(!use_old_apk_flag){
+        if(na_flag){
+            print!("Using NA APK\n");
+            get_na_apk();
+        } else {
+            print!("Using JP APK\n");
+            get_jp_apk();
+        }
+    }
 
-//     let phonepath = "/data/local/tmp/magiarecord.apk";
+    let phonepath = "/data/local/tmp/magiarecord.apk";
 
-//     if(!no_install_flag){
-//         install_apk((force_local_adb_flag || !detect_native_adb()), phonepath);
-//     }
+    if(!no_install_flag){
+        install_apk((force_local_adb_flag || !detect_native_adb()), phonepath);
+    }
     
-//     print!("Done!");
-// } 
+    print!("Done! -- Press Enter to continue");
+    io::stdout().flush();//print requires manual flushing of lines...
+    io::stdin().read_line(&mut String::new()).unwrap();
+} 
 
-fn main(){
-    print!("{}", detect_native_adb());
-}
 
 fn detect_prev_downloaded_adb() -> bool {
     let path_to_check = if cfg!(windows){
@@ -178,11 +178,13 @@ fn install_apk(local: bool, phonepath: &str){
     };
 
     print!("Waiting for Android device on ADB\n");
+    io::stdout().flush();//print requires manual flushing of lines...
     let mut adb_wait_process = Command::new(adbcmd)
         .arg("wait-for-device")
         .spawn()
         .expect("Failed to wait for a device on adb");
     print!("done!\nPushing APK\n");
+    io::stdout().flush();//print requires manual flushing of lines...
     adb_wait_process.wait().expect("Failed while waiting for device");
     let mut adb_push_process = Command::new(adbcmd)
         .args(&["push", "magiarecord.apk", phonepath])
@@ -190,6 +192,7 @@ fn install_apk(local: bool, phonepath: &str){
         .expect("Failed to push apk");
     adb_push_process.wait().expect("Failed while waiting for apk push");
     print!("done!\nInstalling APK\n");
+    io::stdout().flush();//print requires manual flushing of lines...
     let mut adb_install_process = Command::new(adbcmd)
         .args(&["shell", "pm", "install", "-i", "\"com.android.vending\"", "-r", phonepath])
         .spawn()
