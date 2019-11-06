@@ -34,7 +34,7 @@ main() {
     cp -r scripts_for_NA_install $stage
 
     cd $stage
-    7z a $src/$CRATE_NAME-$TRAVIS_TAG-$TARGET.tar.gz *
+    zip -r $src/$CRATE_NAME-$TRAVIS_TAG-$TARGET.zip magiarecord
     cd $src
 
     rm -rf $stage
