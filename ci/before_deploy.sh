@@ -22,9 +22,9 @@ main() {
     # TODO Update this to build the artifacts that matter to you
     cross rustc --bin magiarecord_automatic_updater --target $TARGET --release -- -C lto
 
-    wintarget="x86_64-pc-windows-gnu"
+    
     # TODO Update this to package the right artifacts
-    if [$wintarget == $TARGET]; then
+    if [$TARGET == *windows*]; then
         cp target/$TARGET/release/magiarecord_automatic_updater*exe $stage/
     else
         cp target/$TARGET/release/magiarecord_automatic_updater $stage/
