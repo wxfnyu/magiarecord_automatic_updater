@@ -1,4 +1,4 @@
-MagiReco ADB Auto Installer and Updater ver. 3.0 by veritas
+Magia Record ADB Auto Installer and Updater ver. 1.0rust by veritas
 ---------------------------------------------------------
 
 What is this?
