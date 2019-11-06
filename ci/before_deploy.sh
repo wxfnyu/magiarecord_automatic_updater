@@ -1,4 +1,4 @@
-!#/bin/bash
+
 # This script takes care of building your crate and packaging it for release
 
 
@@ -25,6 +25,7 @@ main() {
     wintarget="x86_64-pc-windows-gnu"
     # TODO Update this to package the right artifacts
     if [$wintarget == $TARGET]
+    then
         cp target/$TARGET/release/magiarecord_automatic_updater*exe $stage/
     else
         cp target/$TARGET/release/magiarecord_automatic_updater $stage/
@@ -37,6 +38,5 @@ main() {
 
     rm -rf $stage
 }
-
 
 main
