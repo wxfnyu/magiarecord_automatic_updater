@@ -19,6 +19,11 @@ fn main() {
     let force_adb_download_flag = args.iter().any(|x| x == "-forceADBDownload");
     let use_old_apk_flag = args.iter().any(|x| x == "-noAPKDownload");
     let no_install_flag = args.iter().any(|x| x == "-noInstall");
+    let do_nothing_flag = args.iter().any(|x| x == "-doNothing");
+
+    if(do_nothing_flag){
+        return;
+    }
 
     if(force_adb_download_flag || ((!detect_native_adb() || force_local_adb_flag)  && !detect_prev_downloaded_adb())){
         //print!("Downloading ADB");
