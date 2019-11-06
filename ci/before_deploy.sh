@@ -21,7 +21,7 @@ main() {
     cross rustc --bin magiarecord_automatic_updater --target $TARGET --release -- -C lto
 
     # TODO Update this to package the right artifacts
-    cp target/$TARGET/release/magiarecord_automatic_updater $stage/
+    cp target/$TARGET/release/magiarecord_automatic_updater?(\.exe) $stage/
     cp -r scripts_for_NA_install $stage
 
     cd $stage
@@ -30,5 +30,7 @@ main() {
 
     rm -rf $stage
 }
+
+shopt -s extglob
 
 main
