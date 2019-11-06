@@ -25,6 +25,7 @@ main() {
     
     # TODO Update this to package the right artifacts
     if [$TARGET == *windows*]; then
+        echo "targeting windows..."
         cp target/$TARGET/release/magiarecord_automatic_updater*exe $stage/
     else
         cp target/$TARGET/release/magiarecord_automatic_updater $stage/
