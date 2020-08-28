@@ -16,31 +16,35 @@ Written in rust as a technical exercise.
 Prerequisites
 -------------
 
-A computere connected to a supported Android device. If you're not sure if your device is supported, try asking in the MagiReco discord, linked below.
+A computer connected to a supported Android device. If you're not sure if your device is supported, try asking in the MagiReco discord, linked below.
 
 MagiReco ADB Auto Updater has been tested and confirmed to be working on Windows 10, and ArchLinux. It should work on MacOS, but I have not had the chance to test it.
 
 How to use (JP Version)
 ----------------------------------
 
-1. Enable USB Debugging Mode on your Android device. [Guide](https://www.kingoapp.com/root-tutorials/how-to-enable-usb-debugging-mode-on-android.htm)
+1. Download the most recent version from [Releases](https://github.com/wxfnyu/magiarecord_automatic_updater/releases)
 
-2. Download the appropriate release for your system \(Windows, MacOS, or Linux\) \( it's best to put it in its own folder on your computer like "Documents/magireco" \)
+2. Enable USB Debugging Mode on your Android device. [Guide](https://www.kingoapp.com/root-tutorials/how-to-enable-usb-debugging-mode-on-android.htm)
 
-3. Simply run the executable.
+3. Download the appropriate release for your system \(Windows, MacOS, or Linux\) \( it's best to put it in its own folder on your computer like "Documents/magireco" \)
+
+4. Simply run the executable.
 
 If you're confused about any of this, feel free to ping or dm me via the Discord server below.
 
 How to use (Installing NA Version)
 ----------------------------------
 
-1. Enable USB Debugging Mode on your Android device. [Guide](https://www.kingoapp.com/root-tutorials/how-to-enable-usb-debugging-mode-on-android.htm)
+1. Download the most recent version from [Releases](https://github.com/wxfnyu/magiarecord_automatic_updater/releases)
 
-2. Download the appropriate release for your system \(Windows, MacOS, or Linux\) \( it's best to put it in its own folder on your computer like "Documents/magireco" \)
+2. Enable USB Debugging Mode on your Android device. [Guide](https://www.kingoapp.com/root-tutorials/how-to-enable-usb-debugging-mode-on-android.htm)
 
-3. A script provide the correct configuration to the executable are provided in the repository \(NA-windows.bat, or NA-general.sh\)
+3. Download the appropriate release for your system \(Windows, MacOS, or Linux\) \( it's best to put it in its own folder on your computer like "Documents/magireco" \)
 
-4. Run the script you downloaded. 
+4. A script provide the correct configuration to the executable are provided in the repository \(NA-windows.bat, or NA-general.sh\)
+
+5. Run the script you downloaded. 
 
 
 Advanced
