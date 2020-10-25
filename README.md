@@ -129,6 +129,8 @@ MagiReco Discord: https://discord.gg/SNJyn5H \(Ping me with @veritas#8733\)
 
 MagiReco English Wiki: http://magireco.wikia.com/wiki/Magia_Record_English_Wiki
 
+Why NA support hasn't been dropped (Private self-hostable NA server): https://github.com/kavezo/ZipZap
+
 License
 -------
 
