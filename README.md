@@ -1,3 +1,8 @@
+DEPRECIATED DUE TO APK PURE BEING ANNOYING
+===========================================
+
+APKPure download URLs are now a pain in the ass to parse, and I no longer have the time to fix it, so if someone wants to adopt, please do so.
+
 Magia Record ADB Auto Installer and Updater ver. 1.0rust by veritas
 ---------------------------------------------------------
 
